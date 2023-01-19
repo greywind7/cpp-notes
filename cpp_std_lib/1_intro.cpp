@@ -12,19 +12,28 @@ T cube (T x) {
 // class template
 template <typename T>
 class circ {
+    public:
     T radius;
     float area;
 
-    public:
+    void setArea() {
+        area = 3.14 * radius * radius;
+    }
+
     circ(T rad) {
         radius = rad;
-        area =0.0;
+        setArea();
     }
-    float calArea() {
-        area = 3.14 * radius * radius;
-        return area;
-    }
+
+    float getArea() {return area;}
 };
+
+template <typename A, typename B>
+circ<A> operator * (const circ<A> cla, circ<B> clb) {
+    circ<A>temp(cla.radius * clb.radius);
+    temp.setArea();
+    return temp;
+}
 
 using namespace std;
 
@@ -33,8 +42,13 @@ int main() {
     cout << cube(10.1) << endl; // automatically inferred
 
     circ<int> simp(2); // must be specidied
-    cout << simp.calArea() << endl;
+    simp = cube(simp);
+    cout << "Area be like " << simp.getArea() << endl;
 
     circ<float> comp(6.9);
-    cout << comp.calArea() << endl;
+    cout << comp.getArea() << endl;
+    
+    circ lol = simp * comp;
+    cout << "complex area be like; " << lol.getArea();
+    
 }
