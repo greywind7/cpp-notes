@@ -28,6 +28,7 @@ class circ {
     float getArea() {return area;}
 };
 
+// do something with decltype here
 template <typename A, typename B>
 circ<A> operator * (const circ<A> cla, circ<B> clb) {
     circ<A>temp(cla.radius * clb.radius);
@@ -52,3 +53,15 @@ int main() {
     cout << "complex area be like; " << lol.getArea();
     
 }
+
+/* Standard Template Library
+ * 
+ * STL separates algorithms from Containers
+ * So if there are N algos and M containers
+ * We have N * M implementations
+ * Bad bad bad
+ * 
+ * For this we have iterators
+ * Each container is supposed to provide an iterator and algos use that
+ *
+*/
